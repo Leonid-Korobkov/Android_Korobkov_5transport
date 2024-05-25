@@ -72,7 +72,6 @@ class TransportAdapter(
 
         // Устанавливаем слушатель нажатия на иконку удаления
         binding.deleteImageView.setOnClickListener {
-            // Вызываем функцию обратного вызова удаления транспорта с передачей текущего элемента
             onDeletePressedListener.invoke(currentItem)
         }
 

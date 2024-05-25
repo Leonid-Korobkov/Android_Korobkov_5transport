@@ -7,14 +7,19 @@ import android.widget.AdapterView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.android_korobkov.l.android_korobkov_5transport.State
 import com.example.android_korobkov.l.android_korobkov_5transport.databinding.ActivityListTransportBinding
 import com.example.android_korobkov.l.android_korobkov_5transport.databinding.DialogAddTransportBinding
 
 class TransportAdapterActivity : AppCompatActivity() {
     private lateinit var adapter: TransportAdapter
     private lateinit var binding: ActivityListTransportBinding
+
+    private var state: State = State()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Восстанавливаем состояние активности, если оно сохранено
+        savedInstanceState?.let { state = it.getParcelable("state") ?: State() }
 
         // Связываем макет с активити
         binding = ActivityListTransportBinding.inflate(layoutInflater)
@@ -166,4 +171,9 @@ class TransportAdapterActivity : AppCompatActivity() {
         return android.graphics.Color.rgb(red, green, blue)
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        // Сохраняем состояние активности перед уничтожением
+        outState.putParcelable("state", state)
+    }
 }
